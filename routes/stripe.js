@@ -20,4 +20,11 @@ router.post('/create-session', async function(req, res, next) {
     res.json({"sessionUrl": session.url});
 });
 
+router.get('/products', async function(req, res){
+    const products = await stripe.products.list({
+        limit: 4,
+    });
+    res.json(products);
+});
+
 module.exports = router;
