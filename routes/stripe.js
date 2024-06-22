@@ -5,13 +5,13 @@ const stripe = require('stripe')(stripeKey);
 
 router.post('/create-session', async function(req, res, next) {
     const domain = process.env.APP_DOMAIN;
+    const items = req.body;
+    if(items?.length === 0){
+        return res.status(404)
+            .json({"sessionUrl": null, error: "An error occurred while processing your request."});
+    }
     const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-                price: "price_1PRgy2KRgHLbHvECrBbnVm6t",
-                quantity: 1,
-            },
-        ],
+        line_items: items,
         mode: 'payment',
         success_url: `${domain}/success`,
         cancel_url: `${domain}/cancel`,
