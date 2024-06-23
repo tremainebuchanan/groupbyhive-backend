@@ -9,6 +9,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const stripeRouter = require('./routes/stripe');
 const registrationRouter = require('./routes/register');
+const authRouter = require('./routes/auth')
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/stripe', stripeRouter);
 app.use('/register', registrationRouter);
+app.use('/auth', authRouter);
 
 module.exports = app;
